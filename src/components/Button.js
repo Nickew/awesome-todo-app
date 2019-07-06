@@ -30,6 +30,8 @@ type ButtonProps = $ReadOnly<{|
     color?: ?string,
     padding?: number,
     fontSize?: number,
+    borderBottomRightRadius?: number,
+    borderBottomLeftRadius?: number,
   },
 |}>;
 
@@ -52,6 +54,8 @@ class Button extends React.Component<ButtonProps> {
           height: styled.height || 40,
           width: styled.width || 100,
           fontSize: styled.fontSize || 14,
+          borderBottomRightRadius: styled.borderBottomRightRadius || 0,
+          borderBottomLeftRadius: styled.borderBottomLeftRadius || 0,
         })
       : styles;
     const accessibilityStates = [];

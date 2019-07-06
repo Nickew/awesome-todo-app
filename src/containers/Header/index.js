@@ -17,7 +17,6 @@ const buttonStyles = {
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
     paddingTop: 20,
     flexWrap: 'nowrap',
     flexDirection: 'row',

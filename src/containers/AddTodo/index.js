@@ -11,8 +11,8 @@ const Header = () => (
 const buttonStyles = {
   backgroundColor: '#000',
   color: '#fff',
-  height: 60,
-  padding: 15,
+  height: 50,
+  padding: 10,
   fontSize: 20,
 };
 

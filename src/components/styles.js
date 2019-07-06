@@ -7,11 +7,15 @@ const dynamicStyles = ({
   color,
   padding,
   fontSize,
+  borderBottomRightRadius,
+  borderBottomLeftRadius,
 }) => {
   return StyleSheet.create({
     button: {
       height,
       backgroundColor,
+      borderBottomRightRadius,
+      borderBottomLeftRadius,
     },
     text: {
       textAlign: 'center',
@@ -29,6 +33,8 @@ export const getStyles = ({
   color,
   padding,
   fontSize,
+  borderBottomRightRadius,
+  borderBottomLeftRadius,
 }) => {
   return dynamicStyles({
     backgroundColor,
@@ -37,6 +43,8 @@ export const getStyles = ({
     color,
     padding,
     fontSize,
+    borderBottomRightRadius,
+    borderBottomLeftRadius,
   });
 };
 
