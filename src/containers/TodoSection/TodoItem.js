@@ -11,6 +11,10 @@ type TodoItemProps = $ReadOnly<{|
   date?: ?number,
   description?: ?string,
   title: ?string,
+  id: number,
+  completed: boolean,
+  removeMethod: id => mixed,
+  completeMethod: id => mixed,
 |}>;
 
 class TodoItem extends React.Component<TodoItemProps> {
@@ -20,32 +24,60 @@ class TodoItem extends React.Component<TodoItemProps> {
     this.state = {
       active: false,
     };
-    this.onPress = this.onPress.bind(this);
+    this.toggleActive = this.toggleActive.bind(this);
   }
-  onPress() {
+  toggleActive() {
     this.setState({ active: !this.state.active });
   }
+  setCompleted = () => {
+    this.props.completeMethod(this.props.id);
+    this.toggleActive();
+  };
   render() {
-    const { date, description, title } = this.props;
+    const {
+      id,
+      completed,
+      date,
+      description,
+      title,
+      removeMethod,
+      completeMethod,
+    } = this.props;
     const { active } = this.state;
+    const TodoStyles = [styles.todo];
+    if (completed) {
+      TodoStyles.push(styles.todoCompleted);
+    }
     return (
       <TouchableWithoutFeedback
-        onPress={this.onPress}
+        onPress={this.toggleActive}
         touchSoundDisabled={true}
       >
-        <View style={styles.todo}>
+        <View style={TodoStyles}>
           <View style={styles.todoContainer}>
             <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>{description}</Text>
+            {active ? (
+              <Text style={styles.description}>{description}</Text>
+            ) : null}
             <Text>{date}</Text>
           </View>
           {active ? (
             <View style={styles.todoControls}>
               <View style={styles.todoControlsItem}>
-                <Button styled={removeButtonStyles}>Remove</Button>
+                <Button
+                  onPress={() => removeMethod(id)}
+                  styled={removeButtonStyles}
+                >
+                  Remove
+                </Button>
               </View>
               <View style={styles.todoControlsItem}>
-                <Button styled={completeButtonStyles}>Complete</Button>
+                <Button
+                  onPress={this.setCompleted}
+                  styled={completeButtonStyles}
+                >
+                  Complete
+                </Button>
               </View>
             </View>
           ) : null}
@@ -75,6 +107,9 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderRadius: 3,
     marginBottom: 15,
+  },
+  todoCompleted: {
+    opacity: 0.5,
   },
   todoContainer: {
     padding: 10,

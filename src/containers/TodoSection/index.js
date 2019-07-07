@@ -1,33 +1,36 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import TodoList from './TodoList';
+import { StyleSheet, View, FlatList } from 'react-native';
 import TodoItem from './TodoItem';
+import { TodoContext } from '../../modules/todoModule';
 
-const TodoSection = () => (
-  <View style={styles.container}>
-    <TodoList>
-      <TodoItem
-        title="Learn React Native!"
-        description="Lorem lorem ipsum"
-        date={Date.now()}
-      />
-      <TodoItem
-        title="Learn React Native!"
-        description="Lorem lorem ipsum"
-        date={Date.now()}
-      />
-      <TodoItem
-        title="Learn React Native!"
-        description="Lorem lorem ipsum"
-        date={Date.now()}
-      />
-    </TodoList>
-  </View>
-);
+const TodoSection = () => {
+  const { data, removeTodoItem, completeTodoItem } = React.useContext(
+    TodoContext,
+  );
+  const sortedData = data && data.sort((a, b) => a.completed - b.completed);
+  return (
+    <FlatList
+      style={styles.flatList}
+      data={sortedData}
+      renderItem={({ item }) => (
+        <TodoItem
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          description={item.description}
+          date={item.date}
+          completed={item.completed}
+          removeMethod={removeTodoItem}
+          completeMethod={completeTodoItem}
+        />
+      )}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
+  flatList: {
+    marginTop: 20,
   },
 });
 
