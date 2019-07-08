@@ -6,6 +6,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native';
 import Button from '../../components/Button';
+import { convertDate, convertTime } from '../../utils/convertUnixToDate';
 
 type TodoItemProps = $ReadOnly<{|
   date?: ?number,
@@ -48,18 +49,25 @@ class TodoItem extends React.Component<TodoItemProps> {
     if (completed) {
       TodoStyles.push(styles.todoCompleted);
     }
+    const convertedDate = convertDate(date);
+    const convertedTime = convertTime(date);
     return (
       <TouchableWithoutFeedback
         onPress={this.toggleActive}
         touchSoundDisabled={true}
       >
         <View style={TodoStyles}>
+          {completed ? (
+            <View style={styles.todoCompletedCrossline} />
+          ) : null}
           <View style={styles.todoContainer}>
             <Text style={styles.title}>{title}</Text>
             {active ? (
               <Text style={styles.description}>{description}</Text>
             ) : null}
-            <Text>{date}</Text>
+            <Text>
+              {convertedDate} - {convertedTime}
+            </Text>
           </View>
           {active ? (
             <View style={styles.todoControls}>
@@ -110,6 +118,14 @@ const styles = StyleSheet.create({
   },
   todoCompleted: {
     opacity: 0.5,
+  },
+  todoCompletedCrossline: {
+    position: 'absolute',
+    width: '100%',
+    height: 1,
+    backgroundColor: '#000',
+    left: 0,
+    top: 27,
   },
   todoContainer: {
     padding: 10,

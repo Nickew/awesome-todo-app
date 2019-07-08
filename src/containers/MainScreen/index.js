@@ -4,9 +4,9 @@ import Header from './Header';
 import AddTodo from './AddTodo';
 import TodoContainer from './TodoContainer';
 
-const MainScreen = () => (
+const MainScreen = ({ navigation }) => (
   <View style={styles.container}>
-    <Header />
+    <Header navigation={navigation} />
     <AddTodo />
     <TodoContainer />
   </View>

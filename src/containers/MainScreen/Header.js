@@ -2,10 +2,15 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Button from '../../components/Button';
 
-const Header = () => (
+const Header = ({ navigation }) => (
   <View style={styles.container}>
     <Text style={styles.title}>My todo list</Text>
-    <Button styled={buttonStyles}>Settings</Button>
+    <Button
+      onPress={() => navigation.navigate('Settings')}
+      styled={buttonStyles}
+    >
+      Settings
+    </Button>
   </View>
 );
 

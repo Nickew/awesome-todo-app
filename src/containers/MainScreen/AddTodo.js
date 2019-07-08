@@ -10,6 +10,7 @@ const Header = () => {
   const [description, setDescription] = React.useState('Maybe some details?');
   const onPress = () => setToggle(!toggle);
   const addNewTodo = () => {
+    console.log(Date.now());
     addTodoItem({
       id: Date.now(),
       title,
@@ -21,7 +22,7 @@ const Header = () => {
   return (
     <View style={styles.container}>
       <Button onPress={onPress} styled={buttonStyles}>
-        Add todo task
+        Add new task
       </Button>
       {toggle ? (
         <View>
