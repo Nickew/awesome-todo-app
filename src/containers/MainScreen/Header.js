@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Title from './Title';
+import { StyleSheet, View, Text } from 'react-native';
 import Button from '../../components/Button';
 
 const Header = () => (
   <View style={styles.container}>
-    <Title>My todo list</Title>
+    <Text style={styles.title}>My todo list</Text>
     <Button styled={buttonStyles}>Settings</Button>
   </View>
 );
@@ -21,6 +20,10 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 32,
+    color: '#000',
   },
 });
 

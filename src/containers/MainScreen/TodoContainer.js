@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import TodoItem from './TodoItem';
 import { TodoContext } from '../../modules/todoModule';
 
-const TodoSection = () => {
+const TodoContainer = () => {
   const { data, removeTodoItem, completeTodoItem } = React.useContext(
     TodoContext,
   );
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TodoSection;
+export default TodoContainer;
